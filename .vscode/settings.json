@@ -1,0 +1,11 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.alwaysShowStatus": true,
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"vs-code-prettier-eslint.prettierLast": true,
+	"prettier.useTabs": true,
+	"prettier.enable": false // Optional if using Prettier
+}
