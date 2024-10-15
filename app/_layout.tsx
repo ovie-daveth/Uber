@@ -31,6 +31,9 @@ const RootLayout = () => {
       initialRouteName="index"
     >
       <Stack.Screen name="index" />
+      <Stack.Screen name="(root)" />
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="+not-found" />
     </Stack>
   );
 };
