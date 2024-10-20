@@ -38,6 +38,21 @@ const CustomButton = ({
                 return "bg-[#0286ff]"; // Default to primary color
         }
     };
+
+    const getTextVariantStyle = (textVariant: string) => {
+        switch (textVariant) {
+            case "secondary":
+                return "text-white";
+            case "success":
+                return "test-blue-500";
+            case "danger":
+                return "text-red-500";
+            case "outline":
+                return "bg-transparent border-neutral-300 border-[0.5px]";
+            default:
+                return "text-neutral-700"; // Default to primary color
+        }
+    };
     return (
         <TouchableOpacity
             activeOpacity={0.7}
@@ -48,7 +63,7 @@ const CustomButton = ({
             {...prop}
         >
             {IconLeft && <IconLeft />}
-            <Text className={`text-white text-lg font-semibold`}>{title}</Text>
+            <Text className={`text-white text-lg font-semibold ${getTextVariantStyle(textVariant)}`}>{title}</Text>
             {IconRight && <IconRight />}
         </TouchableOpacity>
     );
