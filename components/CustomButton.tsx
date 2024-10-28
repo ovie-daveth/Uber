@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import { icons } from "@/constants";
 
 type Prop = {
     title: string
@@ -10,6 +11,7 @@ type Prop = {
     IconRight: string
     IconLeft: string
     className?: string
+    loadingState?: boolean
 }
 
 // Utility function to get background style based on the variant
@@ -21,6 +23,7 @@ const CustomButton = ({
     textVariant = "default",
     IconRight,
     IconLeft,
+    loadingState,
     ...prop
 }: Prop) => {
 
@@ -55,6 +58,7 @@ const CustomButton = ({
     };
     return (
         <TouchableOpacity
+            disabled={loadingState}
             activeOpacity={0.7}
             onPress={action}
             className={`w-full h-12 py-2 items-center justify-center shadow-md rounded-full flex-row shadow-neutral-400/70 ${getBgVariantStyle(
@@ -63,7 +67,11 @@ const CustomButton = ({
             {...prop}
         >
             {IconLeft && <IconLeft />}
-            <Text className={`text-white text-lg font-semibold ${getTextVariantStyle(textVariant)}`}>{title}</Text>
+            {
+                loadingState ?
+                    <Image alt="image" source={icons.point} resizeMode="contain" className="w-5 h-5" />
+                    : <Text className={`text-white text-lg font-semibold ${getTextVariantStyle(textVariant)}`}>{loadingState ? "Loading..." : title}</Text>
+            }
             {IconRight && <IconRight />}
         </TouchableOpacity>
     );

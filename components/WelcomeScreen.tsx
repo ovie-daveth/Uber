@@ -33,7 +33,7 @@ const WelcomeScreen = ({ data, swiperRef, isLastSlide }: any) => {
                 }}
                 title={isLastSlide ? "Get Started" : "Next"}
                 bgVariant="primary"
-                textVariant="default"
+                textVariant="secondary"
                 IconRight=""
                 IconLeft=""
                 className="mt-10"

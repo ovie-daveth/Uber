@@ -7,7 +7,7 @@ type Prop = {
     labelStyle?: string
     icon?: string,
     placeholder: string
-    value: any
+    value: string
     onChangeText: (e: any) => void;
     containerStyle?: string
     iconStyle?: string
@@ -25,9 +25,11 @@ const InputField = ({ label, labelStyle, placeholder, icon, value, onChangeText,
                             icon && <Image source={icon} className={`w-5 h-5 ml-4 ${iconStyle}`} />
                         }
                         <TextInput
+                            onChangeText={onChangeText}
                             className={`rounded-full p-2 font-light  text-sm flex-1 text-left  ${inputStyle}`}
                             secureTextEntry={secureTextEntry}
                             placeholder={placeholder}
+                            value={value}
                         />
                     </View>
                 </View>

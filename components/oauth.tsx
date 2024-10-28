@@ -1,13 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Alert } from 'react-native'
 import React from 'react'
 import CustomButton from './CustomButton'
 import { icons } from '@/constants'
 
 const Oauth = () => {
-    const handleGoogleSignIn = () => {
+
+    const handleGoogleSignIn = async () => {
 
     }
+
+
+
     return (
         <View>
             <View className='flex flex-row justify-center items-center mt-4 gap-x-3'>

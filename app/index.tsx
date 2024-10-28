@@ -1,11 +1,23 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+/* eslint-disable prettier/prettier */
+import React, { useEffect, useState } from "react";
 import { Redirect } from "expo-router";
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
 
-const index = () => {
-  return <Redirect href="/(auth)/welcome" />;
+const Index = () => {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  return <Redirect href={session && session.user ? "/(root)/home" : "/(auth)/welcome"} />;
 };
 
-export default index;
+export default Index;
