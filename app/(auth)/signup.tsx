@@ -6,7 +6,6 @@ import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import Oauth from "@/components/oauth";
-import { supabase } from "@/lib/supabase";
 
 
 const SignUp = () => {
@@ -22,21 +21,7 @@ const SignUp = () => {
 
     const onSignUpPress = async () => {
         setLoading(true)
-        const {
-            data: { session },
-            error,
-        } = await supabase.auth.signUp({
-            email: formValue.email,
-            password: formValue.password,
-        })
 
-        if (error) {
-            Alert.alert(error.message)
-            console.log(error)
-            return
-        }
-        if (!session) Alert.alert('Please check your inbox for email verification!')
-        setLoading(false)
         router.replace("/(auth)/signin")
     };
 

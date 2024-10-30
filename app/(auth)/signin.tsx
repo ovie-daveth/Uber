@@ -1,20 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { View, Text, ScrollView, Image, Alert, AppState } from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
-import { supabase } from '@/lib/supabase'
 import Oauth from "@/components/oauth";
+import { Login } from "@/api/auth";
 
-AppState.addEventListener('change', (state) => {
-    if (state === 'active') {
-        supabase.auth.startAutoRefresh()
-    } else {
-        supabase.auth.stopAutoRefresh()
-    }
-})
+
 
 const SignIn = () => {
 
@@ -27,19 +21,17 @@ const SignIn = () => {
 
     const onSignInPress = async () => {
         setLoading(true)
-        const { error } = await supabase.auth.signInWithPassword({
-            email: formValue.email,
-            password: formValue.password,
-        })
-
-        if (error) {
-            Alert.alert(error.message)
-            console.log(error.message)
-            return
+        try {
+            const response = await Login(formValue);
+            if (response) {
+                console.log("loggedIn", response)
+                setLoading(false)
+                // router.push("/(tabs)")
+            }
+        } catch (error: any) {
+            console.log(error?.message)
+            setLoading(false)
         }
-        setLoading(false)
-        console.log("logggedin")
-        router.push("/(tabs)")
     }
 
     return (
