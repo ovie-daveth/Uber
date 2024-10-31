@@ -2,8 +2,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const API_URL = "http://192.168.230.215:8000";
-console.log(API_URL)
+const API_URL = "http://192.168.244.215:8000";
+// console.log(API_URL)
 const apiClient = axios.create({
   baseURL: API_URL,
 });
@@ -65,7 +65,7 @@ export const SignUp = async (data: any) => {
     }
   };
   
-export const getProfile = async () => {
+export const GetProfile = async () => {
   try {
     return await apiClient.get("/user/profile");
   } catch (error) {

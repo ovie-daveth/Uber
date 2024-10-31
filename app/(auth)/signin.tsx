@@ -7,6 +7,8 @@ import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import Oauth from "@/components/oauth";
 import { Login } from "@/api/auth";
+import { storeToken } from "@/lib/utils";
+import { LoginResponse } from "@/interface/LoginResponse";
 
 
 
@@ -24,12 +26,13 @@ const SignIn = () => {
         try {
             const response = await Login(formValue);
             if (response) {
-                console.log("loggedIn", response)
-                setLoading(false)
-                // router.push("/(tabs)")
+                console.log("loggedIn", response.data)
+                const result = response.data as LoginResponse;
+                storeToken(result.jwt);
+                router.push("/(root)/(tabs)")
             }
         } catch (error: any) {
-            console.log(error?.message)
+            console.log("error", error?.message)
             setLoading(false)
         }
     }

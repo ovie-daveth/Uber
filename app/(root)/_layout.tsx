@@ -1,10 +1,15 @@
-import { View, Text } from "react-native";
+/* eslint-disable prettier/prettier */
 import React from "react";
+import { Tabs } from "expo-router";
 
 export default function _layout() {
     return (
-        <View>
-            <Text>_layout</Text>
-        </View>
+        <Tabs
+            screenOptions={{
+                headerShown: false
+            }}
+        >
+            <Tabs.Screen name="home" />
+        </Tabs>
     );
 }
