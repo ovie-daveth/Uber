@@ -9,7 +9,7 @@ import Oauth from "@/components/oauth";
 import { Login } from "@/api/auth";
 import { storeToken } from "@/lib/utils";
 import { LoginResponse } from "@/interface/LoginResponse";
-
+import Modal from "react-native-modal"
 
 
 const SignIn = () => {
@@ -29,12 +29,15 @@ const SignIn = () => {
                 console.log("loggedIn", response.data)
                 const result = response.data as LoginResponse;
                 storeToken(result.jwt);
-                router.push("/(root)/(tabs)")
             }
         } catch (error: any) {
             console.log("error", error?.message)
             setLoading(false)
         }
+    }
+
+    const GoHome = () => {
+        router.replace("/(root)/home")
     }
 
     return (
@@ -77,6 +80,11 @@ const SignIn = () => {
                     <Text className="text-neutral-700 text-sm italic text-center mt-8">Don't have an account? <Link href="/(auth)/signup" className="text-primary-500">Sign Up</Link></Text>
                 </View>
             </View>
+            <Modal isVisible={true}>
+                <View>
+
+                </View>
+            </Modal>
         </ScrollView>
     );
 };
