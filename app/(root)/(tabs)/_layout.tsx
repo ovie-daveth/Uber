@@ -2,12 +2,21 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { View } from "react-native";
 
 const _layout = () => {
+
+    const TabIconView = ({icon,color, size, focus}: any) => {
+        return <View className={`flex flex-row justify-center items-center rounded-full ${focus ? "bg-general-400":""}`}>
+            <View className={` rounded-full w-10 h-10 items-center justify-center ${focus ? "bg-general-400":""}`}>
+            <Icon name={icon} size={15} color={color} />
+            </View>
+        </View>;
+    }
     return (
         <Tabs
         screenOptions={({ route }) => ({
-            tabBarIcon: ({ color, size }) => {
+            tabBarIcon: ({ color, size, focused }) => {
                 let iconName;
 
                 // Set the icons for each tab
@@ -22,7 +31,7 @@ const _layout = () => {
                 }
 
                 // Return the icon component
-                return  <Icon name={iconName}  size={size} color={color} />;
+                return  <TabIconView icon={iconName} color={color} size={size} focus={focused} />;
             },
             tabBarStyle: {
                 position: 'absolute', 
@@ -34,13 +43,18 @@ const _layout = () => {
                 shadowOffset: { width: 0, height: 5 }, 
                 shadowOpacity: 0.2, 
                 shadowRadius: 10, 
-                backgroundColor: 'white', 
-                borderRadius: 15, 
-                paddingVertical: 10,
-                marginBottom: 10 
+                backgroundColor: '#ffff', 
+                borderRadius: 100, 
+                paddingVertical: 2,
+                paddingHorizontal: 5,
+                marginBottom: 10 ,
+                height: 60,
             },
-            tabBarActiveTintColor: '#000', // Active tab color
-            tabBarInactiveTintColor: 'gray',  // Inactive tab color
+            tabBarActiveTintColor: '#fff', // Active tab color
+            tabBarInactiveTintColor: 'grey',  // Inactive tab color
+            tabBarLabelStyle: {
+                display: 'none',
+            },
             headerShown: false, // Hide the header
         })}
             initialRouteName="home"
