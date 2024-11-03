@@ -3,7 +3,7 @@ import { View, Text, TouchableWithoutFeedback, KeyboardAvoidingView, Image, Text
 import React from 'react'
 
 type Prop = {
-    label: string
+    label?: string
     labelStyle?: string
     icon?: string,
     placeholder: string

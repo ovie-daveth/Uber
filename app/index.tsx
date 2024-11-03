@@ -4,34 +4,28 @@ import { Redirect } from "expo-router";
 import { getToken } from "@/lib/utils";
 
 const Index = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  // const [isLogin, setIsLogin] = useState(false);
+  // const [token, setToken] = useState<string | null>(null);
+  const [redirection, setRedirection] = useState<React.ReactNode>(null);
 
   useEffect(() => {
-    const checkAsyncStorage = () => {
-      const tokend = getToken("token");
+    const checkAsyncStorage = async () => {
+      const tokend = await getToken("token");
       console.log("raw token", tokend); // Log the raw token
 
       if (tokend) {
-        setToken(tokend); // Store the token
-        setIsLogin(true); // Set login state to true
-        console.log("check", token);
+        console.log("check", tokend);
+        setRedirection(<Redirect href="/(root)/home" />)
       } else {
-        setIsLogin(false); // Set login state to false
+        setRedirection(<Redirect href="/(auth)/welcome" />);
       }
     };
 
     checkAsyncStorage();
   }, []);
 
+  return redirection
 
-  if (isLogin) {
-    return (
-      <Redirect href="/(root)/home" />
-    )
-  } else {
-    return <Redirect href="/(auth)/welcome" />
-  }
 };
 
 export default Index;

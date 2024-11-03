@@ -6,10 +6,12 @@ export default function _layout() {
     return (
         <Tabs
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                tabBarStyle: { display: 'none' }  // Hide the tab bar
             }}
         >
             <Tabs.Screen name="home" />
+         
         </Tabs>
     );
 }

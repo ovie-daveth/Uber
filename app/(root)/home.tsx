@@ -1,35 +1,37 @@
 /* eslint-disable prettier/prettier */
-import { GetProfile } from '@/api/auth'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { router } from 'expo-router'
+import { Redirect } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import React, { Component, useEffect } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, Image } from 'react-native'
+import { Text, View } from 'react-native'
+import Modal from 'react-native-modal'
 
 const Home = () => {
 
-    // const getProfile = async () => {
-    //     const response = await GetProfile()
-    //     if (response) {
-    //         console.log("profile", response)
-    //     }
-    // }
+    const [isLoading, setIsLoading] = useState(true)
+   
+  useEffect(() => {
+    setTimeout(() => {
+        setIsLoading(false)
+    }, 2000);
+  }, [])
 
-    // useEffect(() => {
-    //     getProfile()
-    // }, [])
-
-    const Logout = async () => {
-        await AsyncStorage.removeItem("token")
-        router.push("/(auth)/welcome")
+    const Redirecting = () => {
+        return <Redirect href="/(root)/(tabs)/home" />
     }
+
+    if(!isLoading) return Redirecting()
+
     return (
         <View className='pt-10 bg-slate-100 h-full'>
             <StatusBar style="dark" />
-            <Text> textInComponent </Text>
-            <TouchableOpacity onPress={Logout}>
-                <Text>Logout</Text>
-            </TouchableOpacity>
+            <Modal animationIn={"bounceIn"} animationOut={"bounce"} swipeDirection={"left"} statusBarTranslucent={true} className="h-full min-h-full" isVisible={true}>
+                <View className="bg-white flex flex-col justify-center items-center py-5 rounded-lg gap-y-5">
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Text className="text-sm text-center font-medium">Loading your data, it will take just a minute</Text>
+                    
+                </View>
+            </Modal>
         </View>
     )
 }
