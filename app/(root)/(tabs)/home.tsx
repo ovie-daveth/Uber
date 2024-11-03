@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import GoogleMap from "@/components/MapView";
+import GoogleSearchInput from "@/components/GoogleSearchInput";
 
 
 const Home = () => {
@@ -15,9 +16,12 @@ const Home = () => {
                 <Icon name="menu" size={30} color="#7d7d7d" className=""  />
                 </TouchableOpacity>
             </View>
+            <View>
+                <GoogleSearchInput />
+            </View>
             <GoogleMap />
-            <ScrollView>
-                <View className="flex-1 bg-white absolute bottom-0 w-full min-h-[300px] rounded-t-3xl">
+            <ScrollView className="">
+                <View className="rounded-t-4xl bg-white z-50">
 
                 </View>
             </ScrollView>

@@ -12,7 +12,7 @@ const GoogleMap = () => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        region={{
+        region={{ 
           latitude: driverLocation.latitude,
           longitude: driverLocation.longitude,
           latitudeDelta: 0.0922,
